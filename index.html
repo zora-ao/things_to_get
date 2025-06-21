@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Things to Get</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Itim&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="flex grid grid-cols-[200px_1fr] font-[Itim] relative">
+        <!--Navigation section-->
+        <section id="navigation" class="py-5 md:relative fixed ease duration-300 md:relative md:translate-x-0 -translate-x-full bg-blue-400 h-screen border border-black text-center flex flex-col z-50">
+            <button id="nav-hide" class="fixed md:hidden left-[130px] bottom-10 md:relative w-[30px] pr-1 text-end">➡️</button>
+            <!--Money section-->
+            <div class="my-5 text-justify px-3">
+                <h1>Current Money:</h1>
+                <p>₱<span id="current-money">5000</span></p>
+            </div>
+            <ul class="flex flex-col gap-5 mt-10 text-justify md:z-0 px-5 cursor-pointer">
+                <li id="items-list" class="nav-btns">Items List</li>
+                <li id="add-item" class="nav-btns">Add Item</li>
+                <li id="save-money" class="nav-btns">Save Money</li>
+                <li id="history" class="nav-btns">History</li>
+                <li id="about" class="nav-btns">About</li>
+            </ul>
+        </section>
+        <!--Container-->
+        <section id="items-container" class="py-5 md:h-full h-screen md:w-full w-screen md:overflow-hidden">
+            <header class="text-center">
+                <h1 class="text-4xl">Things to Get</h1>
+                <p>List of all the items to get.</p>
+            </header>
+            <!--Filter Items-->
+            <div class="md:flex-row flex-col md:px-10 px-5 my-5 flex justify-evenly">
+                <ul class="flex gap-x-10 w-full overflow-x-auto">
+                    <li class="border border-black rounded px-3 py-1">100-200</li>
+                    <li class="border border-black rounded px-3 py-1">300-500</li>
+                    <li class="border border-black rounded px-3 py-1">600-1000</li>
+                    <li class="border border-black rounded px-3 py-1">600-1000</li>
+                    <li class="border border-black rounded px-3 py-1">600-1000</li>
+                    <li class="border border-black rounded px-3 py-1">600-1000</li>
+                </ul>
+                <input type="text" class="border border-black px-3 w-1/2 rounded" placeholder="Search">
+            </div>
+            <!--Items List-->
+            <div id="contain-each" class="px-10 mt-0 pb-20 grid md:grid-cols-4 gap-5 md:overflow-y-auto h-full md:h-[350px]">
+                
+            </div>
+
+        </section>
+        <!--Add items-->
+        <section id="add-section" class="border hidden md:w-full md:h-full w-screen h-screen flex flex-col md:px-0 px-2 md:justify-center">
+            <h1 class="text-center text-2xl md:my-0 my-5">Add Items to get</h1>
+            <div class="grid md:w-1/2 w-full gap-y-2 mx-auto rounded border border-black py-5 px-3"> 
+                <input class="border border-black py-2 px-3 rounded-full" id="item-name" type="text" placeholder="Item name" required>
+                <input class="border border-black py-2 px-3 rounded-full" id="category" type="text" placeholder="Category" required>
+                <input class="border border-black py-2 px-3 rounded-full" id="price" type="number" placeholder="Item price" required>
+                <textarea class="border border-black py-2 px-3 rounded" id="reason" placeholder="Reason" rows="3" cols="2" required></textarea>
+                <button id="add-item-btn" class="border border-black py-2">Add Item</button>
+            </div>
+        </section>
+        <!--Save Money-->
+        <section id="save-money-section" class="flex hidden md:w-full w-screen flex-col py-10 px-2 md:px-5">
+            <h1 class="text-2xl my-10">Save money</h1>
+            <div class="flex md:justify-start justify-center w-full flex-row gap-x-2">
+                <input id="amount-to-save" class="border border-black px-3 py-2 rounded-lg" type="number" placeholder="Amount to save">
+                <button id="add-money-btn" class="border border-black rounded px-3 py-2">Add</button>
+            </div>
+        </section>
+        <!--History Section-->
+        <section id="history-section" class="h-screen hidden scroll-my-20 md:px-0 px-2 md:w-full w-screen">
+            <div class="md:m-10 m-5">
+                <h1 class="md:text-4xl text-2xl">History</h1>
+                <p>List of all the items that you bought.</p>
+                <button id="clean-history" class="border border-black px-3 md:py-2">Clean</button>
+            </div>
+            <div id="history-items-container" class="border border-black h-[60%] p-5 flex flex-wrap justify-center gap-10 overflow-y-auto">
+            </div>
+        </section>
+    </div>
+
+    <script type="module" src="addItems.js"></script>
+    <script type="module" src="getDate.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
