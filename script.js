@@ -67,9 +67,9 @@ export const displayItems = (items) => {
     }
 
     items.forEach((item, index) => {
-        const borderColor = currentMoney >= item.price ? "border-green-600" : "border-red-600";
+        const btnColor = currentMoney >= item.price ? "bg-[#031d42]" : "bg-[#690202]";
     containEach.innerHTML += 
-    `<div id="${item.name}" class="w-[200px] ${borderColor} h-[200px] flex flex-col gap-3 justify-center border border-black px-2 relative md:z-0">
+    `<div id="${item.name}" class="w-[200px] bg-[#7c7254] rounded text-white h-[200px] flex flex-col gap-3 justify-center border border-black px-2 relative md:z-0">
         <button class="remove absolute right-2 top-0 text-xl">x</button>
         <!--Details-->
         <div class="my-0">
@@ -77,7 +77,7 @@ export const displayItems = (items) => {
             <p>${item.reason}</p>
         </div>
         <p>Cost: ₱${item.price}</p>
-        <button id="${index}" class="obtain w-full bg-black text-white py-2 rounded">Obtain</button>
+        <button id="${index}" class="obtain ${btnColor} w-full text-white py-2 rounded">Obtain</button>
     </div>`
     });
 
