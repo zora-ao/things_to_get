@@ -1,6 +1,6 @@
 import { displayItems } from "./script.js";
 const itemName = document.getElementById("item-name");
-const itemCategory = document.getElementById("category");
+const itemQuantity = document.getElementById("quantity");
 const itemPrice = document.getElementById("price");
 const itemReason = document.getElementById("reason");
 const addBtn = document.getElementById("add-item-btn");
@@ -17,9 +17,17 @@ try {
 
 
 addBtn.addEventListener("click", () => {
+    const name = itemName.value.trim();
+
+    const duplicate = items.some(item => item.name.toLowerCase() === name.toLowerCase());
+    if(duplicate){
+        alert("That Item is already in the list!");
+        return;
+    }
+
     let currentItems = {
-        name: itemName.value,
-        category: itemCategory.value,
+        name,
+        quantity: itemQuantity.value,
         price: itemPrice.value,
         reason: itemReason.value
     };
@@ -28,7 +36,7 @@ addBtn.addEventListener("click", () => {
     localStorage.setItem("things", JSON.stringify(items));
 
     itemName.value = "";
-    itemCategory.value = "";
+    itemQuantity.value = "";
     itemPrice.value = "";
     itemReason.value = "";
     displayItems(items);

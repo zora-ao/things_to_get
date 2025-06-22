@@ -11,9 +11,11 @@ const addMoneyBtn = document.getElementById("add-money-btn");
 const amountToSave = document.getElementById("amount-to-save");
 const historyBtn = document.getElementById("history");
 const historySection = document.getElementById("history-section");
+const aboutBtn = document.getElementById("about");
+const aboutSection = document.getElementById("about-section");
 
 
-let currentMoney = Number(localStorage.getItem("cost")) || 4000;
+let currentMoney = Number(localStorage.getItem("cost")) || 0;
 
 export const timeContainer = () => {
     return JSON.parse(localStorage.getItem("timeObtain")) || [];
@@ -37,24 +39,27 @@ const obtainItem = (items) => {
     obtainBtn.forEach((btn, index) => {
         btn.addEventListener('click', (e) => {
             const timeObtain = new Date();
-            console.log(timeObtain)
             const target = e.target;
             const parentEl = document.getElementById(target.id).parentElement;
             const find = items.find(i => i.name === parentEl.id);
-            if(currentMoney > find.price){
-                const pushTime = timeContainer();
-                currentMoney = currentMoney - find.price;
-                currentMoneyDisplay.innerHTML = currentMoney;
-                localStorage.setItem("cost", currentMoney);
-
-                items.splice(index, 1);
-                localStorage.setItem("things", JSON.stringify(items));
-
-                pushTime.push({...find, time: timeObtain})
-                localStorage.setItem("timeObtain", JSON.stringify(pushTime));
-                displayItems(items);
-                displayHistory(timeContainer());
+            
+            if(currentMoney < find.price){
+                alert("You don't have enough money save!");
+                return;
             };
+            
+            const pushTime = timeContainer();
+            currentMoney = currentMoney - (find.price * find.quantity);
+            currentMoneyDisplay.innerHTML = currentMoney;
+            localStorage.setItem("cost", currentMoney);
+
+            items.splice(index, 1);
+            localStorage.setItem("things", JSON.stringify(items));
+
+            pushTime.push({...find, time: timeObtain})
+            localStorage.setItem("timeObtain", JSON.stringify(pushTime));
+            displayItems(items);
+            displayHistory(timeContainer());
         });
     });
 };
@@ -69,14 +74,19 @@ export const displayItems = (items) => {
     items.forEach((item, index) => {
         const btnColor = currentMoney >= item.price ? "bg-[#031d42]" : "bg-[#690202]";
     containEach.innerHTML += 
-    `<div id="${item.name}" class="w-[200px] bg-[#7c7254] rounded text-white h-[200px] flex flex-col gap-3 justify-center border border-black px-2 relative md:z-0">
+    `<div id="${item.name}" class="w-[250px] ease duration-500 bg-[#7c7254] rounded text-white h-[300px] flex flex-col gap-3 justify-evenly py-2 px-2 relative md:z-0">
         <button class="remove absolute right-2 top-0 text-xl">x</button>
         <!--Details-->
-        <div class="my-0">
+        <div class="my-0 flex justify-evenly">
             <h1 class="font-bold text-center">${item.name}</h1>
-            <p>${item.reason}</p>
+            <p>${item.quantity}x</p>
         </div>
-        <p>Cost: ₱${item.price}</p>
+        <hr />
+        <p>${item.reason}</p>
+        <div class="flex flex-col justify-evenly">
+            <p>Cost: ₱${item.price}</p>
+            <p>Total: ₱${item.price * item.quantity}</p>
+        </div>
         <button id="${index}" class="obtain ${btnColor} w-full text-white py-2 rounded">Obtain</button>
     </div>`
     });
@@ -140,12 +150,12 @@ eachBtn.forEach(btn => {
     });
 });
 
-
 addItem.addEventListener('click', () => {
     itemsContainer.classList.add("hidden");
     addSection.classList.remove("hidden");
     saveMoneySection.classList.add("hidden");
     historySection.classList.add("hidden");
+    aboutSection.classList.add("hidden");
 });
 
 itemsList.addEventListener('click', () => {
@@ -153,6 +163,7 @@ itemsList.addEventListener('click', () => {
     addSection.classList.add("hidden");
     saveMoneySection.classList.add("hidden");
     historySection.classList.add("hidden");
+    aboutSection.classList.add("hidden");
 });
 
 saveMoneyBtn.addEventListener('click', () => {
@@ -160,6 +171,7 @@ saveMoneyBtn.addEventListener('click', () => {
     addSection.classList.add("hidden");
     saveMoneySection.classList.remove("hidden");
     historySection.classList.add("hidden");
+    aboutSection.classList.add("hidden");
 });
 
 historyBtn.addEventListener('click', () => {
@@ -167,5 +179,13 @@ historyBtn.addEventListener('click', () => {
     addSection.classList.add("hidden");
     saveMoneySection.classList.add("hidden");
     historySection.classList.remove("hidden");
+    aboutSection.classList.add("hidden");
 });
 
+aboutBtn.addEventListener('click', () => {
+    itemsContainer.classList.add("hidden");
+    addSection.classList.add("hidden");
+    saveMoneySection.classList.add("hidden");
+    historySection.classList.add("hidden");
+    aboutSection.classList.remove("hidden");
+});

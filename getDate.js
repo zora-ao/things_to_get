@@ -26,6 +26,10 @@ const getTime = (item) => {
 export const displayHistory = (items) => {
     historyItemsContainer.innerHTML = '';
 
+    if(items.length === 0){
+        historyItemsContainer.innerHTML = "<h1>You don't have an item in the history yet. Buy something first.</h1>"
+    }
+
     items.forEach((item) => {
         const timeAgo = getTime(item);
         historyItemsContainer.innerHTML += 
