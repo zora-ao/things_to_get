@@ -1,0 +1,13 @@
+#history-section{
+    background-image: url("https://i.pinimg.com/736x/7e/6a/7a/7e6a7ad6ede2b31f94dc38a6fcd7752e.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+#items-container{
+    color: white;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://i.pinimg.com/736x/2e/40/dc/2e40dc63dacbb648982ddc2589a76356.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}

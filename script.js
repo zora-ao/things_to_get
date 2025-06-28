@@ -44,7 +44,7 @@ const obtainItem = (items) => {
             const find = items.find(i => i.name === parentEl.id);
             
             if(currentMoney < find.price){
-                alert("You don't have enough money save!");
+                alert("You don't have enough money!");
                 return;
             };
             
@@ -64,6 +64,16 @@ const obtainItem = (items) => {
     });
 };
 
+const displayMoney = () => {
+    if(amountToSave.value < 0 && amountToSave.value === ''){
+        alert("You can't save negative numbers!")
+        return
+    }
+    currentMoney += Number(amountToSave.value);
+    currentMoneyDisplay.innerHTML = currentMoney;
+    localStorage.setItem("cost", currentMoney);
+}
+
 export const displayItems = (items) => {
     containEach.innerHTML = '';
     currentMoneyDisplay.innerHTML = currentMoney;
@@ -74,7 +84,7 @@ export const displayItems = (items) => {
     items.forEach((item, index) => {
         const btnColor = currentMoney >= item.price ? "bg-[#031d42]" : "bg-[#690202]";
     containEach.innerHTML += 
-    `<div id="${item.name}" class="w-[250px] ease duration-500 bg-[#7c7254] rounded text-white h-[300px] flex flex-col gap-3 justify-evenly py-2 px-2 relative md:z-0">
+    `<div id="${item.name}" class="w-[250px] ease duration-500 bg-[#819A91] rounded text-white h-[300px] flex flex-col gap-3 justify-evenly py-2 px-2 relative md:z-0">
         <button class="remove absolute right-2 top-0 text-xl">x</button>
         <!--Details-->
         <div class="my-0 flex justify-evenly">
@@ -98,30 +108,19 @@ export const displayItems = (items) => {
     obtainItem(items);
 
     //add money
-
-    const displayMoney = () => {
-        if(amountToSave.value < 0){
-            alert("no negative")
-            return
-        }
-        currentMoney += Number(amountToSave.value);
-        currentMoneyDisplay.innerHTML = currentMoney;
-        localStorage.setItem("cost", currentMoney);
-        displayItems(items);
-        amountToSave.value = '';
-    }
-
-    addMoneyBtn.addEventListener('click', () => {
-        displayMoney();
-    });
-
-    amountToSave.addEventListener("keyup", (e) => {
-        if(e.key === "Enter"){
-            displayMoney();
-        }
-    })
+    displayMoney();
 
 };
+
+addMoneyBtn.addEventListener('click', () => {
+    displayMoney();
+});
+
+amountToSave.addEventListener("keyup", (e) => {
+    if(e.key === "Enter"){
+        displayMoney();
+    }
+})
 
 //Display History
 displayHistory(timeContainer());
@@ -132,9 +131,9 @@ const navigation = document.getElementById("navigation");
 
 const hideNavigation = () => {
     if(navigation.classList.contains("-translate-x-full")){
-        hideNavBtn.innerHTML = "➡️"
+        hideNavBtn.innerHTML = "Show"
     } else {
-        hideNavBtn.innerHTML = "⬅️"
+        hideNavBtn.innerHTML = "Hide"
     }
     }
 
@@ -150,42 +149,28 @@ eachBtn.forEach(btn => {
     });
 });
 
-addItem.addEventListener('click', () => {
-    itemsContainer.classList.add("hidden");
-    addSection.classList.remove("hidden");
-    saveMoneySection.classList.add("hidden");
-    historySection.classList.add("hidden");
-    aboutSection.classList.add("hidden");
-});
 
-itemsList.addEventListener('click', () => {
-    itemsContainer.classList.remove("hidden");
-    addSection.classList.add("hidden");
-    saveMoneySection.classList.add("hidden");
-    historySection.classList.add("hidden");
-    aboutSection.classList.add("hidden");
-});
+const sections = {
+    itemsContainer,
+    addSection,
+    saveMoneySection,
+    historySection,
+    aboutSection
+};
 
-saveMoneyBtn.addEventListener('click', () => {
-    itemsContainer.classList.add("hidden");
-    addSection.classList.add("hidden");
-    saveMoneySection.classList.remove("hidden");
-    historySection.classList.add("hidden");
-    aboutSection.classList.add("hidden");
-});
+const showSection = (secToShow) => {
+    for(const sec in sections){
+        sections[sec].classList.add("hidden");
+    }
+    secToShow.classList.remove("hidden")
+}
 
-historyBtn.addEventListener('click', () => {
-    itemsContainer.classList.add("hidden");
-    addSection.classList.add("hidden");
-    saveMoneySection.classList.add("hidden");
-    historySection.classList.remove("hidden");
-    aboutSection.classList.add("hidden");
-});
+addItem.addEventListener('click', () => showSection(addSection))
 
-aboutBtn.addEventListener('click', () => {
-    itemsContainer.classList.add("hidden");
-    addSection.classList.add("hidden");
-    saveMoneySection.classList.add("hidden");
-    historySection.classList.add("hidden");
-    aboutSection.classList.remove("hidden");
-});
+itemsList.addEventListener('click', () => showSection(itemsContainer));
+
+saveMoneyBtn.addEventListener('click', () => showSection(saveMoneySection));
+
+historyBtn.addEventListener('click', () => showSection(historySection));
+
+aboutBtn.addEventListener('click', () => showSection(aboutSection));

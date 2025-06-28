@@ -33,7 +33,7 @@ export const displayHistory = (items) => {
     items.forEach((item) => {
         const timeAgo = getTime(item);
         historyItemsContainer.innerHTML += 
-        `<div class="border flex flex-col justify-evenly border-black w-[300px] h-[150px] px-3 py-2 text-center">
+        `<div class="border flex flex-col justify-evenly bg-[#98A1BC] rounded-lg border-black w-[300px] h-[150px] px-3 py-2 text-center">
             <h1 class="text-2xl">${item.name}</h1>
             <p>Congratulations for acquiring your ${item.name}</p>
             <p>You obtained this Item ${timeAgo}.</p>

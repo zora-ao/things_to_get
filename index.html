@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Things to Get</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +15,7 @@
     <div class="flex grid grid-cols-[200px_1fr] font-[Itim] relative bg-[#dbd9b7]">
         <!--Navigation section-->
         <section id="navigation" class="py-5 md:relative fixed ease duration-300 md:relative -translate-x-full md:translate-x-0  bg-[#e1c18f] h-screen border border-black text-center flex flex-col z-50">
-            <button id="nav-hide" class="fixed md:hidden left-[180px] top-10 md:relative w-[30px] pr-1 text-end">➡️</button>
+            <button id="nav-hide" class="fixed md:hidden bg-[#e1c18f] left-[180px] border top-10 md:relative pr-1 px-3 rounded text-end">Show</button>
             <!--Money section-->
             <div class="my-5 text-justify px-3 text-center ml-5">
                 <h1>Current Money:</h1>
@@ -29,13 +30,13 @@
             </ul>
         </section>
         <!--Container-->
-        <section id="items-container" class="md:py-5 md:h-full h-full md:w-full w-screen md:overflow-hidden">
+        <section id="items-container" class="md:py-5 h-screen md:w-full w-screen overflow-y-auto md:overflow-hidden bg-[#dbd9b7]">
             <header class="text-center my-5">
                 <h1 class="text-4xl">Things to Get</h1>
                 <p>List of all the items to get.</p>
             </header>
             <!--Items List-->
-            <div id="contain-each" class="px-10 md:py-0 py-20 mt-0 grid md:grid-cols-4 md:gap-10 md:overflow-y-auto md:h-[350px] h-full md:scroll-my-44 scroll-smooth">
+            <div id="contain-each" class="px-10 md:pb-44 mt-0 grid md:grid-cols-4 md:gap-10 gap-5 md:overflow-y-auto md:h-full h-full md:scroll-my-44 scroll-smooth">
                 
             </div>
 
@@ -71,14 +72,14 @@
                 </div>
                 <button id="clean-history" class="border border-black px-3 rounded bg-[#e1c18f] md:py-2">Clean</button>
             </div>
-            <div id="history-items-container" class="h-[60%] scroll-my-20 px-5 flex flex-wrap justify-center gap-10 overflow-y-auto">
+            <div id="history-items-container" class="h-[70%] bg-white/10 rounded backdrop-blur-[10px] md:m-5 py-5 md:py-10 scroll-my-44 px-5 flex flex-wrap justify-center gap-10 overflow-y-auto border border-black">
             </div>
         </section>
         <!--About Section-->
-        <section id="about-section" class="md:w-1/2 w-full md:h-full h-screen mx-10 md:my-20 py-10 hidden">
-            <h1 class="md:text-4xl text-2xl my-5">About this Project</h1>
+        <section id="about-section" class="md:w-1/2 w-screen px-10 md:h-full h-screen md:my-20 py-10 hidden">
+            <h1 class="md:text-4xl text-center text-2xl my-5">About this Project</h1>
             <div>
-                <p>I create this project for saving money and making a list of all the items that I want
+                <p class="indent-10 text-justify">I create this project for saving money and making a list of all the items that I want
                     to buy. Also to track when did I bought a thing in the history section. When you have enough money the 
                     button will be green and if you don't have enough money the button will be red.
                 </p>
